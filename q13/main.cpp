@@ -1,28 +1,61 @@
 #include <iostream>
 
+using namespace std;
+
 class Array{
     public:
-        Array(int n1,int n2,int n3, int n4, int n5){
-            a[0] = n1;
-            a[1] = n2;
-            a[2] = n3;
-            a[3] = n4;
-            a[4] = n5;
+        Array(int b[5]){
+            int i;
+            for(i=0;i<5;i++){
+                a[i]=b[i]; // parmeterized constructor
+            }
         }; // end of constructor
 
         ~Array(){}; // destructor
 
-        int a[5]; // integer array
+        int a[5]; //data member
 
+        void sort();
+
+        void swap(int &,int &);
 }; // end of class
+
+void Array::swap(int &a,int &b) // member function definition
+{
+    int temp = a;
+    a=b;
+    b=temp; // this swap function will effect to variable because reference deckaration
+} // end of function
+
+void Array::sort(){
+    int i;
+    int j;
+    int size = sizeof(a)/sizeof(int);
+    cout << "length of array: " << size << endl;
+    // we can access the variable a in here
+    for(i=0;i<size-1;i++){
+        for(j=0;j<size-1;j++){
+            if(a[j] > a[j+1]){
+                swap(a[j],a[j+1]); // swapping the values
+            } // end of if
+        } // end of for
+    } // end of for
+    cout << "Array in Ascanding oerder: " << endl;
+    for(i=0;i<5;i++){
+        cout << a[i] << endl;
+    } // end of for
+} // end of function
 
 int main(){
 
-    Array array(10,20,30,40,50);
+    int ary[5];
+    int i;
 
-    for(int i =0;i<5;i++){
-        std::cout << array.a[i] << std::endl;
-    } // end of for
-    
+    cout << "Enter 5 integers: ";
+    for(i=0;i<5;i++){
+        cin >> ary[i];
+    }
+    Array ary1(ary); // creating an object also ary's values passing
+    ary1.sort();
     return 0;
 } // end of main
